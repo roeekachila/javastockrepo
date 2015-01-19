@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.myorg.javacourse.Stock.stockState;
+
 @SuppressWarnings("serial")
 public class StockDetailsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -29,7 +31,6 @@ public class StockDetailsServlet extends HttpServlet {
 			pageContent += "<br>";
 			pageContent += stock3.getHtmlDescription();
 			pageContent += "<br>";
-		
 		}
 		catch (ParseException e) {
 			// TODO Auto-generated catch block

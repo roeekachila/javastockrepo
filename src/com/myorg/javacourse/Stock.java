@@ -4,12 +4,20 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class Stock {
+	
+	public enum stockState
+	{
+		BUY,SELL,REMOVE,HOLD
+	}
+	
 	// Class Member
 	private String symbol;
 	private float ask;
 	private float bid;
 	private java.util.Date date;
 	SimpleDateFormat dateFormat;
+	int recommendation;
+	int stockQuantity;
 	
 	public Stock( ) { // zero-parameter c'tor
 	}

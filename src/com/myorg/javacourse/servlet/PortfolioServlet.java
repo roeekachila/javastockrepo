@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.myorg.javacourse.model.Portfolio;
 import com.myorg.javacourse.model.Stock;
 import com.myorg.javacourse.service.PortfolioManager;
 
@@ -15,28 +16,18 @@ import com.myorg.javacourse.service.PortfolioManager;
 public class PortfolioServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 	throws ServletException, IOException {		
-		try {
-			PortfolioManager portfolioManager1 = new PortfolioManager();
-			portfolioManager1.setTitle("portfolio1");
-			PortfolioManager portfolioManager2 = new PortfolioManager(portfolioManager1);
-			portfolioManager2.setTitle("portfolio2");
-			
-			resp.getWriter().println(portfolioManager1.getPortfolio().getHtmlString());	
-			resp.getWriter().println(portfolioManager2.getPortfolio().getHtmlString());	
-			
-			portfolioManager1.deleteStockByIndex(0);
-			
-			resp.getWriter().println(portfolioManager1.getPortfolio().getHtmlString());	
-			resp.getWriter().println(portfolioManager2.getPortfolio().getHtmlString());	
+		PortfolioManager portfolioManager1 = new PortfolioManager();
+		portfolioManager1.setTitle("Exercise 7 portfolio");
+		portfolioManager1.setBalance(10000);		
+		portfolioManager1.buyStock("PIH", 10.0f, 8.5f, "15-12-2014",20);
+		portfolioManager1.buyStock("AAL", 30.0f, 25.5f, "15-12-2014",30);	
+		portfolioManager1.buyStock("CAAS", 20.0f, 15.5f, "15-12-2014",40);	
 		
-			portfolioManager2.setBid(55.55f);
-			
-			resp.getWriter().println(portfolioManager1.getPortfolio().getHtmlString());	
-			resp.getWriter().println(portfolioManager2.getPortfolio().getHtmlString());	
-
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		resp.getWriter().println(portfolioManager1.getPortfolio().getHtmlString());
+		portfolioManager1.sellStock("AAL", -1);
+		resp.getWriter().println(portfolioManager1.getPortfolio().getHtmlString());
+		portfolioManager1.removeStock("CAAS");
+		resp.getWriter().println(portfolioManager1.getPortfolio().getHtmlString());
 	}
 }
 

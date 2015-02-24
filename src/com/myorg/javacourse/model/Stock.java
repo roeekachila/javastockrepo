@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 */
 
 public class Stock {
-	
+		
 	public enum stockState
 	{
 		BUY,SELL,REMOVE,HOLD
@@ -24,17 +24,18 @@ public class Stock {
 	private String dateAsString;
 	private java.util.Date date;
 	SimpleDateFormat dateFormat;
-	int recommendation;
+	stockState recommendation;
 	int stockQuantity;
 	
 	public Stock( ) { // zero-parameter c'tor
 	}
 	
-	public Stock(String l_symbol,float l_ask,float l_bid, String l_date) throws ParseException { // one-parameter c'tor
+	public Stock(String l_symbol,float l_ask,float l_bid, String l_date, int l_stockQuantity) throws ParseException { // one-parameter c'tor
 		symbol = l_symbol;
 		ask = l_ask;
 	    bid = l_bid;     
 	    dateAsString = l_date;
+	    stockQuantity = l_stockQuantity;
 	    
 		dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -42,8 +43,8 @@ public class Stock {
 	}
 	
 	public Stock(Stock stock) throws ParseException { // copy c'tor	
-		this(stock.getSymbol(),stock.getAsk(),stock.getBid(),stock.getDateAsString());	
-//		this("CAAS", 32.2f, 31.5f, "15-11-2014");
+		this(stock.getSymbol(),stock.getAsk(),stock.getBid(),stock.getDateAsString(), stock.getStockQuantity());	
+//		this("CAAS", 32.2f, 31.5f, "15-11-2014",20);
 	}
 	
 	
@@ -74,6 +75,14 @@ public class Stock {
 		return dateAsString;
 	}
 	
+	public int getStockQuantity() {
+		return stockQuantity;
+	}
+	
+	public void setStockQuantity(int newStockQuantityValue) {
+		stockQuantity = newStockQuantityValue;
+	}
+	
 	public void setDate(java.util.Date date) {
 		this.date = date;
 	}
@@ -81,8 +90,8 @@ public class Stock {
 	// Class Method
 	public String getHtmlDescription() throws ParseException {		
 		return "<b> Stock symbol: </b>" + symbol + ", <b> ask: </b> " +
-						ask + ", <b> bid: </b> " + bid + ", <b> date: </b> " +
-															dateFormat.format(date) ;	
+						ask + ", <b> quantity: </b> " + stockQuantity +
+							", <b> total purchase: </b> " + (stockQuantity*ask) ;	
 	}
 
 	

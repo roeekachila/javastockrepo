@@ -11,18 +11,7 @@ import com.myorg.javacourse.model.Stock;
 	
 	public PortfolioManager( ) { // zero-parameter c'tor
 		portfolio = new Portfolio();		
-		portfolio.setTitle("Roee portfolio");
-		try {
-			Stock stock1 = new Stock("PIH", 13.1f, 12.4f, "15-11-2014");
-			Stock stock2 = new Stock("AAL", 5.78f, 5.5f, "15-11-2014");
-			Stock stock3 = new Stock("CAAS", 32.2f, 31.5f, "15-11-2014");
-			portfolio.addStock(stock1);
-			portfolio.addStock(stock2);
-			portfolio.addStock(stock3);			
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+		portfolio.setTitle("defaultName");	
 	}
 	
 	public PortfolioManager( PortfolioManager portfolioManager) throws ParseException { // copy c'tor
@@ -43,9 +32,31 @@ import com.myorg.javacourse.model.Stock;
 	 public void setTitle(String l_title) {
 		 portfolio.setTitle(l_title);
 	    }
+	 
+	 public void setBalance(float l_balance) {
+			portfolio.setBalance(l_balance);
+	    }
 	
 	 public Portfolio getPortfolio() {
 	        return portfolio;
 	    }
+	 
+	 public void sellStock( String symbolToSell, int quantity) {
+		 portfolio.sellStock(symbolToSell,quantity);
+	    }
+	 
+	 public void buyStock(String l_symbol,float l_ask,float l_bid, String l_date, int l_stockQuantity) {
+			try {
+				Stock stock = new Stock(l_symbol, l_ask, l_bid, l_date,l_stockQuantity);
+				portfolio.buyStock(stock,l_stockQuantity);
+
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+	 
+		public boolean removeStock( String symbolToRemove )  { 
+			 return (portfolio.removeStock(symbolToRemove));
+		}
 
 }
